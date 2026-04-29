@@ -85,6 +85,16 @@ document.addEventListener('DOMContentLoaded', () => {
         starsContainer.appendChild(star);
     }
 
+    // Estrellas Fugaces
+    for (let i = 0; i < 6; i++) {
+        const shootingStar = document.createElement('div');
+        shootingStar.className = 'shooting-star';
+        shootingStar.style.top = Math.random() * 50 + 'vh';
+        shootingStar.style.left = (Math.random() * 50 + 50) + 'vw'; // Que salgan de la derecha
+        shootingStar.style.animationDelay = (Math.random() * 10) + 's';
+        starsContainer.appendChild(shootingStar);
+    }
+
     // Estilos para la animación de las estrellas (añadido dinámicamente)
     const style = document.createElement('style');
     style.innerHTML = `
@@ -156,4 +166,41 @@ document.addEventListener('DOMContentLoaded', () => {
             secretBox.style.cursor = 'default';
         });
     }
+
+    // --- CONTADOR DE TIEMPO EN VIVO ---
+    // Fecha y hora exacta: 31 de marzo de 2026, a las 14:30 (2:30 PM)
+    const startDate = new Date('2026-03-31T14:30:00-05:00');
+
+    function updateCounter() {
+        const now = new Date();
+        let diff = now - startDate;
+
+        if (diff < 0) return; // Si por alguna razón la fecha del celular está mal
+
+        // Cálculo de días totales
+        const daysTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
+        
+        // Asumiendo un promedio de 30 días por mes para simplicidad en este conteo emocional
+        const months = Math.floor(daysTotal / 30);
+        const days = daysTotal % 30;
+
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        const elMonths = document.getElementById('c-months');
+        const elDays = document.getElementById('c-days');
+        const elHours = document.getElementById('c-hours');
+        const elMinutes = document.getElementById('c-minutes');
+        const elSeconds = document.getElementById('c-seconds');
+
+        if(elMonths) elMonths.innerText = months;
+        if(elDays) elDays.innerText = days;
+        if(elHours) elHours.innerText = hours;
+        if(elMinutes) elMinutes.innerText = minutes;
+        if(elSeconds) elSeconds.innerText = seconds;
+    }
+
+    setInterval(updateCounter, 1000);
+    updateCounter(); // Llamada inicial
 });
