@@ -8,6 +8,38 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Pantalla de Login / Validación -->
+    <div id="login-overlay" class="login-overlay">
+        <!-- Paso 1: Nombre -->
+        <div id="step1" class="login-step">
+            <h2>Acceso Restringido</h2>
+            <p>Por favor, ingrese el nombre de la mujer más espectacular del universo para continuar:</p>
+            <input type="text" id="nameInput" placeholder="Escribe tu nombre..." autocomplete="off">
+            <button id="btnStep1">Validar Identidad</button>
+            <p id="error1" class="error-msg hidden">Ese no es el nombre de mi reina. Intenta de nuevo.</p>
+        </div>
+
+        <!-- Paso 2: Pregunta -->
+        <div id="step2" class="login-step hidden">
+            <h2>Identidad Confirmada</h2>
+            <p class="royal-greeting">
+                ¡Bienvenida, mi Reina hermosa!<br>
+                La indiscutible Señorita Magdalena del Folclor y próxima soberana nacional... pero sobre todo, la reina de mi vida.
+            </p>
+            <p class="important-text">Para acceder a tus recuerdos, debes responder una pregunta de vital importancia:</p>
+            <h3 class="big-question">¿Quieres seguir siendo mi novia?</h3>
+            <div class="btn-group">
+                <button id="btnYes">Sí, por supuesto ❤️</button>
+                <button id="btnNo" class="btn-secondary">No</button>
+            </div>
+        </div>
+
+        <!-- Paso 3: Bienvenida Final -->
+        <div id="step3" class="login-step hidden">
+            <h1 class="welcome-final fade-in-slow">Bienvenida a nuestro Viaje de Ida...</h1>
+        </div>
+    </div>
+
     <div class="stars" id="stars"></div>
 
     <header class="hero">
@@ -29,15 +61,12 @@
             <div class="dot"></div>
             <div class="content glass-card">
                 <span class="date">El Inicio del Camino</span>
-                <div class="image-placeholder">
-                    <!-- Aquí pondrás la foto de ustedes al empezar el viaje -->
-                    <span>[Foto de ustedes en el inicio]</span>
+                <div class="media-container">
+                    <video src="video1.mp4" autoplay loop muted playsinline></video>
                 </div>
                 <div class="poem">
-                    <p>"Como un sendero que se abre al horizonte,<br>
-                    sin saber qué nos esperaba en el monte.<br>
-                    Mis pasos dudaban, pero tu sonrisa era el mapa,<br>
-                    la luz que iluminaba cada etapa."</p>
+                    <p>"Todo viaje tiene un comienzo, y nuestro comienzo fue muy especial. El destino nos puso en el mismo lugar, al mismo tiempo y me hizo mirar tu nombre; en ese momento tenía las ganas de un viaje pero no sabía que el viaje sería tan hermoso.<br><br>
+                    Charles Schulz dijo: <em>'En realidad, no importa a dónde vas, sino a quién tienes a tu lado'</em>, y yo tengo a mi lado a la mejor compañía: Tú."</p>
                 </div>
             </div>
         </section>
@@ -46,16 +75,13 @@
         <section class="stop hidden">
             <div class="dot"></div>
             <div class="content glass-card">
-                <span class="date">Acompañándonos</span>
-                <div class="image-placeholder">
-                    <!-- Foto en la mitad del camino -->
-                    <span>[Foto en medio del viaje]</span>
+                <span class="date">Las 7 Olas</span>
+                <div class="media-container">
+                    <video src="video2.mp4" autoplay loop muted playsinline></video>
                 </div>
                 <div class="poem">
-                    <p>"No fue solo el paisaje, fue la compañía,<br>
-                    cada instante a tu lado se volvía poesía.<br>
-                    Descubrí que el mejor destino no es un lugar,<br>
-                    sino tener tus manos al caminar."</p>
+                    <p>"El camino a veces de lejos se ve fácil, pero cuando lo ves con detenimiento, te encuentras con que hasta lo más hermoso tiene su parte peligrosa. Nuestro camino no ha sido fácil aunque sí hermoso, hemos sido golpeados seguido, a veces sin habernos levantado del todo, pero miro mi mano y tú me sostienes. Las cosas bonitas no se consiguen fácil, y sé que ni 7 olas juntas nos pueden derrumbar.<br><br>
+                    <em>'No hay belleza sin algo de extrañeza en sus proporciones, ni gran amor que no haya sobrevivido a una tormenta.'</em> — Sir Francis Bacon."</p>
                 </div>
             </div>
         </section>
@@ -63,17 +89,75 @@
         <!-- Parada 3 -->
         <section class="stop hidden">
             <div class="dot"></div>
-            <div class="content glass-card special-card">
-                <span class="date">Ese Momento Mágico</span>
-                <div class="image-placeholder">
-                    <!-- Foto de cuando le pediste que fuera tu novia -->
-                    <span>[Foto del momento especial]</span>
+            <div class="content glass-card">
+                <span class="date">La Paz de Bahía Cinto</span>
+                <div class="media-container">
+                    <img src="foto3.jpeg" alt="Parada 3">
                 </div>
                 <div class="poem">
-                    <p>"Y el tiempo se detuvo en aquel instante,<br>
-                    el universo entero se hizo expectante.<br>
-                    Una pregunta al viento, un 'sí' como respuesta,<br>
-                    y así comenzó nuestra mejor fiesta."</p>
+                    <p>"Todo gran amor sobrevive a una tormenta, y la tormenta ha sido fuerte. En algunos momentos tuvimos miedo de que el barco se volteara, pero nos dimos apoyo todo el tiempo y eso nos hizo superar la tormenta. Después hubo una recompensa: la paz y la tranquilidad que siento cuando estoy a tu lado, es la paz que sientes al ver un mar tranquilo, una arena limpia y unos colores brillantes.<br><br>
+                    Ahora te veo con transparencia, y ahora podemos disfrutar de la paz juntos, disfrutando de la calma de tu cuerpo, entrando en ti sin temor a nada y disfrutando de un amor como el que merecemos."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parada 4 -->
+        <section class="stop hidden">
+            <div class="dot"></div>
+            <div class="content glass-card">
+                <span class="date">Nuestras Sombras</span>
+                <div class="media-container">
+                    <img src="foto4.jpeg" alt="Parada 4">
+                </div>
+                <div class="poem">
+                    <p>"No sé cuántos granos de arena se necesiten, pero pondré todos los necesarios para construir un futuro contigo, brillante como el sol y hermoso como tú. Estaré contigo incluso en las sombras, y tus ojos hermosos me darán el aliento que necesito. Tus besos me hacen sumergirme en tus aguas y tu cuerpo me hace sentir el rey del mundo, quiero que ese paraíso sea solo para mí.<br><br>
+                    No quiero un paraíso si tú no estás en él, porque contigo, cualquier desierto se vuelve un jardín."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parada 5 -->
+        <section class="stop hidden">
+            <div class="dot"></div>
+            <div class="content glass-card">
+                <span class="date">La Promesa del Caracol</span>
+                <div class="media-container">
+                    <video src="video5.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="poem">
+                    <p>"Nuestro viaje siempre tendrá cambios y a veces pasamos de la calma a algo más movido pero igual de hermoso. Junto a un paisaje cristalino, decidimos unir nuestros caminos, y el agua no era lo único transparente ese día; mis sentimientos por ti también lo eran.<br><br>
+                    No tenía grandes lujos que ofrecerte, solo un pequeño caracol que guardaba todo el sonido del mar y toda mi intención de cuidarte. Ese caracol fue mi promesa. Al pedírtelo oficialmente, el viaje cambió para siempre: dejamos de ser dos viajeros compartiendo una moto para ser uno solo compartiendo un destino. Gracias por valorar lo esencial y por decir que sí en el lugar más claro del mundo."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parada 6 -->
+        <section class="stop hidden">
+            <div class="dot"></div>
+            <div class="content glass-card">
+                <span class="date">Nuestro Refugio</span>
+                <div class="media-container">
+                    <img src="foto6.jpeg" alt="Parada 6">
+                </div>
+                <div class="poem">
+                    <p>"Y aquí, bajo la sombra de la vida que vamos construyendo, encontramos nuestro refugio. Un refugio que no es un lugar físico, sino nosotros mismos. Este primer mes ha sido la ruta más intensa de mi vida. Hemos pasado por tanto, pero al final siempre podemos sentarnos, mirarnos a los ojos y darnos un beso lleno de amor. Quiero que me veas y sepas que puedes descansar a mi lado, eres la persona con la que quiero compartir mi vida.<br><br>
+                    La forma en la que te quiero no es algo que se pueda describir con palabras, por eso trato de explicártelo con besos y caricias.<br><br>
+                    <em>'El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso. No se comporta con rudeza, no es egoísta, no se enoja fácilmente, no guarda rencor. Todo lo disculpa, todo lo cree, todo lo espera, todo lo soporta. El amor jamás deja de ser.'</em> — 1 Corintios 13:4-8."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parada 7 -->
+        <section class="stop hidden">
+            <div class="dot"></div>
+            <div class="content glass-card special-card">
+                <span class="date">Apenas el Comienzo</span>
+                <div class="media-container">
+                    <img src="foto7.jpeg" alt="El momento mágico">
+                </div>
+                <div class="poem">
+                    <p>"Llegamos al final de este recorrido, pero es apenas el inicio de nuestra historia. Si el viaje hasta aquí fue increíble, no puedo imaginar lo que nos espera. En tus ojos encontré mi norte y en tus brazos mi puerto seguro.<br><br>
+                    Este beso es mi promesa de que, sin importar qué tan fuerte sople el viento o qué tan alto suba la marea, siempre estaré aquí para sostenerte. Gracias por ser mi compañera de ruta, mi apoyo en la tormenta y mi paz en la calma.<br><br>Este es un viaje solo de ida, porque no quiero que nunca se acabe. Te amo hoy más que el primer día."</p>
                 </div>
             </div>
         </section>
@@ -84,8 +168,8 @@
             <div class="content glass-card final-card">
                 <h2>Feliz Primer Mes</h2>
                 <p class="message">
-                    Este viaje fue solo el comienzo. Gracias por caminar a mi lado, por apoyarme en los momentos difíciles y por ser mi luz. Puede que hoy no tengamos todas las riquezas del mundo, pero a tu lado, siento que lo tengo todo.<br><br>
-                    Te quiero muchísimo.
+                    Que este sea solo el primero de todos los meses de nuestras vidas.<br>
+                    <strong>Te amo muchísimo, mi Reina.</strong>
                 </p>
             </div>
         </section>
