@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             step1.style.opacity = '0';
             setTimeout(() => {
                 step1.classList.add('hidden');
+                step1.style.display = 'none'; // Asegura que no ocupe espacio
                 step2.classList.remove('hidden');
                 step2.style.display = 'block';
                 // Trigger reflow
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         step2.style.opacity = '0';
         setTimeout(() => {
             step2.classList.add('hidden');
+            step2.style.display = 'none'; // Evita que empuje el paso 3 a la derecha
             step3.classList.remove('hidden');
             step3.style.display = 'block';
             void step3.offsetWidth;

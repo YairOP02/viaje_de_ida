@@ -515,6 +515,10 @@ h1, h2 {
     margin-top: 1rem;
 }
 
+.error-msg.hidden {
+    display: none;
+}
+
 .royal-greeting {
     color: var(--accent-gold) !important;
     font-size: 1.3rem !important;
