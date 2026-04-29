@@ -370,17 +370,30 @@ h1, h2 {
 
 /* Media Queries para iPhone / Móviles */
 @media (max-width: 480px) {
+    .journey {
+        padding: 2rem 0.5rem;
+    }
+
     .path-line {
-        left: 20px;
+        left: 15px;
     }
     
     .stop {
-        padding-left: 40px;
+        padding-left: 30px;
         margin-bottom: 4rem;
     }
 
     .dot {
-        left: -6px;
+        left: -5px;
+    }
+
+    .glass-card {
+        padding: 1rem;
+        border-radius: 15px;
+    }
+
+    .media-container {
+        aspect-ratio: 3/4; /* Hace la imagen más alta y grande */
     }
 
     h1 {
@@ -389,6 +402,33 @@ h1, h2 {
 
     .poem {
         font-size: 1.2rem;
+        top: 50px;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+
+    .final-card {
+        padding: 2rem 0.5rem;
+    }
+
+    .live-counter {
+        padding: 1rem 0.5rem;
+        max-width: 100%;
+        margin: 1.5rem 0;
+    }
+
+    .time-blocks {
+        gap: 8px;
+    }
+
+    .time-block span {
+        font-size: 1.4rem;
+    }
+
+    .time-block small {
+        font-size: 0.55rem;
+        letter-spacing: 0px;
     }
 }
 
@@ -503,8 +543,11 @@ h1, h2 {
 }
 
 .welcome-final {
-    font-size: 3rem;
+    font-size: 2rem;
     animation: pulsate 3s infinite alternate;
+    padding: 0 1.5rem;
+    word-break: break-word;
+    line-height: 1.4;
 }
 
 .fade-in-slow {
