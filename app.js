@@ -15,9 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Paso 1: Validar Nombre
     btnStep1.addEventListener('click', () => {
         const name = nameInput.value.trim().toLowerCase();
-        // Acepta cualquier nombre que tenga más de 3 letras para no ser estrictos, 
-        // pero puedes cambiar la condición si quieres que sea exacto.
-        if (name.length > 3) {
+        // Validación estricta: Solo deja pasar si el texto contiene "francis" o "yair"
+        if (name.includes('francis') || name.includes('yair')) {
             step1.style.opacity = '0';
             setTimeout(() => {
                 step1.classList.add('hidden');
