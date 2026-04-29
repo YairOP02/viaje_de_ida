@@ -137,6 +137,14 @@ h1, h2 {
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.glass-card:not(.final-card):active {
+    transform: scale(0.98);
 }
 
 .date {
@@ -154,9 +162,23 @@ h1, h2 {
     aspect-ratio: 4/5;
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     border: 1px solid var(--glass-border);
+    position: relative;
+}
+
+/* Efecto difuminado sobre la imagen */
+.media-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px) brightness(0.6);
+    -webkit-backdrop-filter: blur(8px) brightness(0.6);
+    transition: opacity 0.6s ease, backdrop-filter 0.6s ease;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .media-container img,
@@ -169,12 +191,63 @@ h1, h2 {
 
 .poem {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
-    line-height: 1.8;
+    font-size: 1.15rem; /* Ajustado para textos largos */
+    line-height: 1.6;
     color: #eaeaea;
     font-style: italic;
-    border-left: 3px solid var(--accent-gold);
-    padding-left: 1rem;
+    position: absolute;
+    top: 80px; /* Espacio para la fecha/título */
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    overflow-y: auto; /* Permite scroll si el texto es muy largo */
+    padding: 1rem;
+}
+
+.tap-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.8);
+    background: rgba(0,0,0,0.5);
+    padding: 5px 15px;
+    border-radius: 20px;
+    animation: pulseHint 2s infinite;
+    transition: opacity 0.6s;
+    pointer-events: none;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+@keyframes pulseHint {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    50% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+}
+
+/* --- ESTADO REVELADO (FOTO VISIBLE) --- */
+.glass-card.revealed .media-container::after {
+    opacity: 0;
+}
+
+.glass-card.revealed .poem {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.glass-card.revealed .tap-hint {
+    opacity: 0;
 }
 
 .special-card {
@@ -190,6 +263,51 @@ h1, h2 {
 .final-card .message {
     font-size: 1.1rem;
     line-height: 1.8;
+}
+
+.song-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 12px 24px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    text-decoration: none;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.song-btn:active {
+    background: var(--accent-gold);
+    color: #000;
+    transform: scale(0.95);
+}
+
+/* --- EASTER EGG STYLES --- */
+.footer-secret {
+    text-align: center;
+    margin-top: 4rem;
+    padding-bottom: 3rem;
+    opacity: 0.2; /* Muy difuminado para que sea un secreto */
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+    min-height: 100px;
+}
+
+.tiny-heart {
+    font-size: 1.5rem;
+    animation: pulseHint 3s infinite;
+}
+
+.secret-message {
+    color: var(--accent-gold);
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    line-height: 1.8;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 /* Media Queries para iPhone / Móviles */

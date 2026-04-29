@@ -96,6 +96,27 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
+    // --- LÓGICA DE TARJETAS INTERACTIVAS (Tocar para revelar) ---
+    const interactiveCards = document.querySelectorAll('.glass-card:not(.final-card)');
+    interactiveCards.forEach(card => {
+        // Añadir el hint dinámicamente
+        const hint = document.createElement('div');
+        hint.className = 'tap-hint';
+        hint.innerHTML = '👆 Toca para ver la imagen';
+        card.appendChild(hint);
+
+        // Al tocar la tarjeta, alterna entre mostrar el poema o la foto
+        card.addEventListener('click', () => {
+            card.classList.toggle('revealed');
+            
+            // Si tiene un video, reproducirlo al revelar para evitar problemas en móviles
+            const video = card.querySelector('video');
+            if (video && card.classList.contains('revealed')) {
+                video.play().catch(e => console.log('Autoplay bloqueado', e));
+            }
+        });
+    });
+
     // 2. Intersection Observer para animar los elementos al hacer scroll
     const observerOptions = {
         root: null,
@@ -107,8 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.remove('hidden');
-                // Opcional: si quieres que la animación se repita si sube y baja, quita el unobserve
-                // observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
@@ -117,4 +136,25 @@ document.addEventListener('DOMContentLoaded', () => {
     stops.forEach(stop => {
         observer.observe(stop);
     });
+
+    // --- EASTER EGG (Secreto Final) ---
+    const secretBox = document.getElementById('secretBox');
+    if (secretBox) {
+        secretBox.addEventListener('click', () => {
+            // Obtener la fecha de hoy
+            const hoy = new Date();
+            const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+            const fechaString = hoy.toLocaleDateString('es-ES', opciones);
+
+            secretBox.style.opacity = '1';
+            secretBox.innerHTML = `
+                <div class="secret-message fade-in-slow">
+                    Con todo el amor del mundo,<br>
+                    de <strong>Yair Oquendo</strong> para su reina <strong>Francis Scott</strong>.<br>
+                    <span style="font-size: 0.9rem; opacity: 0.7; color: white;">${fechaString} - Nuestro Viaje</span>
+                </div>
+            `;
+            secretBox.style.cursor = 'default';
+        });
+    }
 });
