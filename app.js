@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const step1 = document.getElementById('step1');
     const step2 = document.getElementById('step2');
     const step3 = document.getElementById('step3');
+    const btnMagicBack = document.getElementById('btnMagicBack');
     
     const nameInput = document.getElementById('nameInput');
     const btnStep1 = document.getElementById('btnStep1');
@@ -49,7 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
         step2.style.opacity = '0';
         setTimeout(() => {
             step2.classList.add('hidden');
-            step2.style.display = 'none'; // Evita que empuje el paso 3 a la derecha
+            step2.style.display = 'none'; 
+            
+            // Asegurarse de que la vista esté arriba antes de revelar
+            window.scrollTo(0, 0);
+
+            // Mostrar el mensaje mágico (Paso 3)
             step3.classList.remove('hidden');
             step3.style.display = 'block';
             void step3.offsetWidth;
@@ -58,15 +64,41 @@ document.addEventListener('DOMContentLoaded', () => {
             // Iluminación gradual del fondo (de negro puro al fondo transparente estrellado)
             overlay.style.backgroundColor = 'rgba(0,0,0,0)';
             
-            // Después de 4 segundos del mensaje final, desaparecer el overlay por completo
+            // Después de 4 segundos del mensaje final, desaparecer el overlay y mostrar el botón Atrás
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
-                    overlay.remove(); // Quita el overlay del código para poder hacer scroll
+                    overlay.style.display = 'none'; // Solo lo oculta, no lo elimina
+                    document.body.classList.remove('no-scroll'); // Permite hacer scroll nuevamente
+                    btnMagicBack.classList.remove('hidden'); // Muestra el botón de regreso
                 }, 2000);
             }, 4000);
 
         }, 500);
+    });
+
+    // Botón para revivir la magia
+    btnMagicBack.addEventListener('click', () => {
+        window.scrollTo(0, 0);
+        document.body.classList.add('no-scroll');
+        btnMagicBack.classList.add('hidden');
+        
+        // Resetear el overlay a estado visible y negro
+        overlay.style.display = 'flex';
+        void overlay.offsetWidth;
+        overlay.style.backgroundColor = '#000000';
+        overlay.style.opacity = '1';
+
+        // Ocultar paso 3
+        step3.classList.add('hidden');
+        step3.style.display = 'none';
+        step3.style.opacity = '0';
+
+        // Mostrar paso 2 (pregunta) nuevamente
+        step2.classList.remove('hidden');
+        step2.style.display = 'block';
+        void step2.offsetWidth;
+        step2.style.opacity = '1';
     });
 
 
