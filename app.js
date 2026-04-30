@@ -107,24 +107,78 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // --- LÓGICA DE TARJETAS INTERACTIVAS (Tocar para revelar) ---
+    // --- LÓGICA DE TARJETAS INTERACTIVAS (Tocar para revelar, doble toque para pantalla completa) ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightbox-content');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    function openLightbox(card) {
+        const img = card.querySelector('img');
+        const video = card.querySelector('video');
+        lightboxContent.innerHTML = '';
+
+        if (img) {
+            const clone = img.cloneNode();
+            lightboxContent.appendChild(clone);
+        } else if (video) {
+            const clone = document.createElement('video');
+            clone.src = video.src;
+            clone.autoplay = true;
+            clone.loop = true;
+            clone.muted = true;
+            clone.playsInline = true;
+            clone.controls = true;
+            lightboxContent.appendChild(clone);
+        }
+
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightboxContent.innerHTML = '';
+        document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
     const interactiveCards = document.querySelectorAll('.glass-card:not(.final-card)');
     interactiveCards.forEach(card => {
-        // Añadir el hint dinámicamente
+        // Añadir pista de doble toque
+        const dblHint = document.createElement('div');
+        dblHint.className = 'double-tap-hint';
+        dblHint.textContent = '2x 🔍';
+        card.appendChild(dblHint);
+
+        // Añadir el hint de toque simple dinámicamente
         const hint = document.createElement('div');
         hint.className = 'tap-hint';
         hint.innerHTML = '👆 Toca para ver la imagen';
         card.appendChild(hint);
 
-        // Al tocar la tarjeta, alterna entre mostrar el poema o la foto
-        card.addEventListener('click', () => {
-            card.classList.toggle('revealed');
-            
-            // Si tiene un video, reproducirlo al revelar para evitar problemas en móviles
-            const video = card.querySelector('video');
-            if (video && card.classList.contains('revealed')) {
-                video.play().catch(e => console.log('Autoplay bloqueado', e));
+        let lastTap = 0;
+
+        card.addEventListener('click', (e) => {
+            const now = Date.now();
+            const timeSinceLastTap = now - lastTap;
+
+            if (timeSinceLastTap < 300 && timeSinceLastTap > 0) {
+                // Doble toque: abrir lightbox
+                openLightbox(card);
+            } else {
+                // Toque simple: revelar/ocultar poema
+                card.classList.toggle('revealed');
+                const video = card.querySelector('video');
+                if (video && card.classList.contains('revealed')) {
+                    video.play().catch(e => console.log('Autoplay bloqueado', e));
+                }
             }
+
+            lastTap = now;
         });
     });
 
